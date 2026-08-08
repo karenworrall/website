@@ -1,0 +1,10 @@
+# Claude Code session settings (local to this machine)
+.claude/
+
+# macOS
+.DS_Store
+
+# Node (for when we move to Astro)
+node_modules/
+dist/
+.astro/
