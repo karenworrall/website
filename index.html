@@ -80,11 +80,12 @@
   <!-- ========================= Stats ========================= -->
   <section class="band" style="padding-block: 0;" aria-label="Experience at a glance">
     <dl class="stats reveal-group">
-      <div class="stat"><dt>25</dt><dd>Ships</dd></div>
-      <div class="stat"><dt>250+</dt><dd>Ports</dd></div>
-      <div class="stat"><dt>102</dt><dd>Countries</dd></div>
-      <div class="stat"><dt>400+</dt><dd>Tours</dd></div>
+      <div class="stat"><dt>40</dt><dd>Ships</dd></div>
+      <div class="stat"><dt>350+</dt><dd>Ports</dd></div>
+      <div class="stat"><dt>119</dt><dd>Countries</dd></div>
+      <div class="stat"><dt>1,000+</dt><dd>Tours</dd></div>
       <div class="stat"><dt>2005</dt><dd>At sea since</dd></div>
+      <div class="stat"><dt>7</dt><dd>Continents</dd></div>
     </dl>
   </section>
 
@@ -105,9 +106,9 @@
         <a class="door" href="#guides">
           <p class="door-num">01</p>
           <h3>Plan your cruise</h3>
-          <p>Everything you need to make the most of your time ashore, from someone who has done these ports for a living.</p>
+          <p>Everything you need to make the most of your time ashore — advice from someone who has been there in person, many times over, and done the homework so you get the best of it.</p>
           <ul class="door-list">
-            <li>Free port guides by region</li>
+            <li>Port guides by region</li>
             <li>Recorded port &amp; enrichment talks</li>
             <li>One-to-one cruise consulting</li>
           </ul>
@@ -177,12 +178,13 @@
       <div class="feature">
 
         <div class="reveal">
-          <p class="eyebrow">New — recorded talks</p>
+          <p class="eyebrow">Introducing Landfall</p>
           <h2>The talks I give at sea, wherever you are</h2>
           <p class="lede" style="margin-top:1.1rem;">
-            For years these have only existed in a ship's theatre, once, for
-            whoever was on board. Now they are being recorded — history, culture,
-            cuisine, myth and language for the ports you are about to visit.
+            For years these have existed in a ship's theatre, once, for whoever
+            happened to be on board. Landfall is where they live now — history,
+            culture, cuisine, myth and language for the ports you are about
+            to reach.
           </p>
           <p class="lede" style="margin-top:1.1rem;">
             Subscribe for the full library, or buy a single talk before you sail.
@@ -421,8 +423,10 @@
 
   /* --- Nav gains a background once the hero is behind it ----------------- */
   var nav = document.getElementById('nav');
+  // Transparent only while genuinely at the top; otherwise hero content
+  // scrolls up underneath the bar and collides with the links.
   function onScrollNav() {
-    nav.classList.toggle('is-stuck', window.scrollY > window.innerHeight - 120);
+    nav.classList.toggle('is-stuck', window.scrollY > 60);
   }
 
   /* --- Hero parallax: layers move at their own depth --------------------- */
