@@ -26,6 +26,7 @@
   --pale:   #e9f6f9;   /* very pale sky   */
   --paper:  #fbfdfe;
   --ink:    #0a2f3a;
+  --bright-ink: var(--mid);
   --hero-accent: var(--bright);
 }
 
@@ -37,6 +38,7 @@
   --pale:   #e4f1f7;
   --paper:  #f9fcfe;
   --ink:    #06202f;
+  --bright-ink: var(--mid);
   --hero-accent: var(--bright);
 }
 
@@ -48,6 +50,7 @@
   --pale:   #ecf7f3;
   --paper:  #fcfefd;
   --ink:    #0c3138;
+  --bright-ink: var(--mid);
   --hero-accent: var(--bright);
 }
 
@@ -56,7 +59,14 @@
   --on-deep:      #f2fbfc;
   --on-deep-soft: rgba(242, 251, 252, 0.78);
   --ink-soft:     color-mix(in srgb, var(--ink) 82%, transparent);
-  --ink-faint:    color-mix(in srgb, var(--ink) 55%, transparent);
+  /* 55% measured 3.4:1 against the cream band — below the 4.5:1 needed for
+     body-sized text. 68% clears it on both grounds with room to spare. */
+  --ink-faint:    color-mix(in srgb, var(--ink) 68%, transparent);
+
+  /* The gold reads well on navy (5.1:1) but only 2.5:1 on cream, so light
+     grounds get a deeper version of the same hue for anything legibility
+     depends on. Decorative rules and borders may still use --bright. */
+  --bright-ink:   #7a5c2e;
   --hairline:     color-mix(in srgb, var(--deep) 16%, transparent);
   --hairline-soft:color-mix(in srgb, var(--deep) 9%, transparent);
 
@@ -133,14 +143,17 @@ h1, h2, h3 {
 h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 
+/* Set in the display face so the label and the heading below it read as one
+   typographic voice, rather than a sans label floating above a serif. */
 .eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.28em;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mid);
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .lede {
@@ -442,7 +455,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--bright) 85%, white);
+  color: color-mix(in srgb, var(--bright) 55%, white);
   max-width: 24ch;
   line-height: 1.6;
 }
@@ -540,8 +553,9 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-size: 0.62rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  /* Sits on the pale foam band, so it takes ink rather than paper colour */
-  color: var(--ink-faint);
+  /* Measured across viewport heights, this always lands on the navy above the
+     foam, not on the foam itself — so it takes the light ink, not the dark. */
+  color: var(--on-deep-soft);
   display: grid;
   justify-items: center;
   gap: 0.6rem;
@@ -550,7 +564,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   content: "";
   width: 1px;
   height: 34px;
-  background: linear-gradient(var(--mid), transparent);
+  background: linear-gradient(var(--bright), transparent);
   animation: hint 2.4s ease-in-out infinite;
 }
 @keyframes hint {
@@ -718,10 +732,12 @@ section { position: relative; }
   transform: translateY(-4px);
 }
 
-.door-num {
+/* Doubled class so it beats `.door p`, which was silently overriding the
+   accent colour and rendering these labels as body ink. */
+.door .door-num {
   font-size: 0.68rem;
   letter-spacing: 0.24em;
-  color: var(--bright);
+  color: var(--bright-ink);
   margin-bottom: 1.4rem;
 }
 
@@ -1094,7 +1110,7 @@ section { position: relative; }
   gap: 0.7rem;
   font-size: 0.95rem;
 }
-.contact-lines svg { width: 18px; height: 18px; color: var(--bright); flex: none; }
+.contact-lines svg { width: 18px; height: 18px; color: var(--bright-ink); flex: none; }
 .contact-lines a {
   color: var(--ink-soft);
   text-decoration: none;
@@ -1206,7 +1222,7 @@ section { position: relative; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
-.footer-grid h4 {
+.footer-grid .footer-head {
   font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: 400;
