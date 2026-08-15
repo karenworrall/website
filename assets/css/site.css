@@ -897,10 +897,24 @@ section { position: relative; }
    Testimonials
    ========================================================================== */
 
+/* Four quotes, so hold an even 2 x 2 rather than letting auto-fit strand one */
 .quotes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.4rem;
+}
+@media (max-width: 760px) { .quotes { grid-template-columns: 1fr; } }
+
+/* Quote text still to come from Karen — flagged so it cannot ship by accident.
+   Doubled class so it outranks the later `.quote blockquote` rule. */
+.quote.quote--todo blockquote {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-faint);
+  border: 1px dashed var(--hairline);
+  border-radius: 3px;
+  padding: 1.1rem;
 }
 
 .quote {
