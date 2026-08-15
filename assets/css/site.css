@@ -1,11 +1,24 @@
 /* ==========================================================================
    Karen Worrall — homepage prototype
-   Three palettes are defined below. Switch with the control in the corner;
+   Four palettes are defined below. Switch with the control in the corner;
    the whole page is built from tokens, so nothing is hard-coded.
    ========================================================================== */
 
-/* --- Palette 1: Lagoon — bright, tropical, closest to the brief ---------- */
+/* --- Palette 1: Ensign — the business card. Navy and antique gold -------- */
 :root,
+:root[data-palette="ensign"] {
+  --deep:   #16304f;   /* deepest navy          */
+  --mid:    #1f3a5f;   /* the card navy         */
+  --bright: #c29a5c;   /* antique gold          */
+  --pale:   #f2ece1;   /* warm cream, card gold at low tint */
+  --paper:  #fcfaf6;
+  --ink:    #16283d;
+  /* Gold in the hero gradient turns brassy, so the sea keeps its own accent
+     and gold is reserved for type, rules and buttons — as on the card. */
+  --hero-accent: #33608c;
+}
+
+/* --- Palette 2: Lagoon — bright, tropical, closest to the brief ---------- */
 :root[data-palette="lagoon"] {
   --deep:   #063a4b;   /* deep sea blue   */
   --mid:    #0d6d85;   /* sea blue        */
@@ -13,6 +26,7 @@
   --pale:   #e9f6f9;   /* very pale sky   */
   --paper:  #fbfdfe;
   --ink:    #0a2f3a;
+  --hero-accent: var(--bright);
 }
 
 /* --- Palette 2: Deep Water — moodier, navy-led, jade accent -------------- */
@@ -23,6 +37,7 @@
   --pale:   #e4f1f7;
   --paper:  #f9fcfe;
   --ink:    #06202f;
+  --hero-accent: var(--bright);
 }
 
 /* --- Palette 3: Sea Glass — softer, greener, most editorial -------------- */
@@ -33,9 +48,10 @@
   --pale:   #ecf7f3;
   --paper:  #fcfefd;
   --ink:    #0c3138;
+  --hero-accent: var(--bright);
 }
 
-/* --- Tokens derived from the palette (shared by all three) --------------- */
+/* --- Tokens derived from the palette (shared by all four) ---------------- */
 :root {
   --on-deep:      #f2fbfc;
   --on-deep-soft: rgba(242, 251, 252, 0.78);
@@ -296,7 +312,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
     var(--deep) 0%,
     color-mix(in srgb, var(--mid) 88%, var(--deep)) 46%,
     var(--mid) 72%,
-    color-mix(in srgb, var(--bright) 34%, var(--mid)) 100%);
+    color-mix(in srgb, var(--hero-accent) 34%, var(--mid)) 100%);
   color: var(--on-deep);
   isolation: isolate;
 }
@@ -311,7 +327,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   aspect-ratio: 1;
   translate: -50% 0;
   background: radial-gradient(circle,
-    color-mix(in srgb, var(--bright) 40%, transparent) 0%,
+    color-mix(in srgb, var(--hero-accent) 40%, transparent) 0%,
     transparent 62%);
   z-index: -2;
   pointer-events: none;
@@ -839,10 +855,15 @@ section { position: relative; }
   width: clamp(150px, 22vw, 210px);
   aspect-ratio: 2 / 3;
   border-radius: 2px 4px 4px 2px;
-  background: linear-gradient(150deg, var(--mid), var(--deep) 70%);
+  /* Sits on the deep band, so it needs its own accent-lifted fill and a rim,
+     or it disappears into the background it is standing on. */
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--bright) 30%, var(--deep)),
+    var(--deep) 72%);
+  border: 1px solid color-mix(in srgb, var(--bright) 50%, transparent);
   box-shadow:
     inset 7px 0 12px -8px rgba(0, 0, 0, 0.55),
-    0 28px 55px -28px color-mix(in srgb, var(--deep) 80%, transparent);
+    0 28px 55px -28px rgba(0, 0, 0, 0.75);
   display: grid;
   align-content: center;
   justify-items: center;
@@ -970,6 +991,7 @@ section { position: relative; }
   box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--mid);
 }
 
+.swatch--ensign    { background: conic-gradient(#16304f 0 33%, #1f3a5f 0 66%, #c29a5c 0); }
 .swatch--lagoon    { background: conic-gradient(#063a4b 0 33%, #0d6d85 0 66%, #22c7ae 0); }
 .swatch--deepwater { background: conic-gradient(#04243a 0 33%, #0a4e6e 0 66%, #3fd0c9 0); }
 .swatch--seaglass  { background: conic-gradient(#0a3b42 0 33%, #14757c 0 66%, #4fd6b4 0); }
