@@ -874,6 +874,31 @@ section { position: relative; }
    Bylines
    ========================================================================== */
 
+/* Label dividing one credit group from the next, on light bands */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+.section-label span {
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mid);
+  white-space: nowrap;
+}
+.section-label::before,
+.section-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--hairline);
+}
+
+/* Breathing room between successive credit groups */
+.bylines + .section-label { margin-top: 3.4rem; }
+
 .bylines {
   display: flex;
   flex-wrap: wrap;
@@ -954,12 +979,12 @@ section { position: relative; }
 
 .fleet {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.9rem;
   list-style: none;
 }
-@media (max-width: 1000px) { .fleet { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 620px)  { .fleet { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 820px) { .fleet { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .fleet { grid-template-columns: 1fr; } }
 
 .fleet li {
   display: grid;
@@ -1020,8 +1045,8 @@ section { position: relative; }
 /* Second tier: the years spent working on board rather than speaking.
    Quieter by design — it reads as depth of industry experience without
    competing with the lines she currently speaks for. */
-.fleet--past { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 760px) { .fleet--past { grid-template-columns: repeat(2, 1fr); } }
+.fleet--past { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 620px) { .fleet--past { grid-template-columns: repeat(2, 1fr); } }
 
 .fleet--past li {
   border: 0;
@@ -1033,6 +1058,20 @@ section { position: relative; }
   font-size: clamp(0.88rem, 1.2vw, 1rem);
   font-weight: 400;
   color: var(--on-deep-soft);
+}
+
+/* The roles behind those years — the part a cruise line actually cares about */
+.fleet-roles {
+  margin: 1.8rem auto 0;
+  max-width: 56ch;
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--on-deep) 62%, transparent);
+}
+.fleet-roles strong {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--bright) 90%, white);
 }
 
 
